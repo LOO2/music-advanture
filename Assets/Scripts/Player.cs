@@ -13,10 +13,9 @@ public class Player : MonoBehaviour {
 
 	//sprites
 	private SpriteRenderer playerSpriteRender; 
-	public Sprite playerSpriteRight;
-	public Sprite playerSpriteLeft;
-	public Sprite playerSpriteUP;
-	public Sprite playerSpriteDown;
+	public Sprite playerSpriteSide;
+	public Sprite playerSpriteBack;
+	public Sprite playerSpriteFront;
 	
 	//Animation
 	Animator playerAnimator;
@@ -34,7 +33,7 @@ public class Player : MonoBehaviour {
 		playerSpriteRender = GetComponent<SpriteRenderer>();
 		if(playerSpriteRender.sprite == null)
 		{
-			playerSpriteRender.sprite = playerSpriteRight;
+			playerSpriteRender.sprite = playerSpriteSide;
 		}
 
 		//Animation
@@ -63,7 +62,7 @@ public class Player : MonoBehaviour {
 		if(rbPlayer.transform.position.y == mouseTargetPosition.y || rbPlayer.transform.position.x == mouseTargetPosition.x)
 		{
 			//Sprite
-			playerSpriteRender.sprite = playerSpriteUP;
+			playerSpriteRender.sprite = playerSpriteBack;
 			playerSpriteRender.flipX = false;
 
 			//Animation
@@ -86,7 +85,7 @@ public class Player : MonoBehaviour {
 		if(rbPlayer.transform.position.x > mouseTargetPosition.x)
 		{
 			//Sprite
-			playerSpriteRender.sprite = playerSpriteLeft;
+			playerSpriteRender.sprite = playerSpriteSide;
 			playerSpriteRender.flipX = true;
 
 			//Animation
@@ -97,7 +96,7 @@ public class Player : MonoBehaviour {
 		else if(rbPlayer.transform.position.x < mouseTargetPosition.x)
 		{
 			//Sprite
-			playerSpriteRender.sprite = playerSpriteRight;
+			playerSpriteRender.sprite = playerSpriteSide;
 			playerSpriteRender.flipX = false;
 
 			//Animation
@@ -109,23 +108,23 @@ public class Player : MonoBehaviour {
 		if(rbPlayer.transform.position.y > mouseTargetPosition.y)
 		{
 			//Sprite
-			playerSpriteRender.sprite = playerSpriteDown;
+			playerSpriteRender.sprite = playerSpriteFront;
 			playerSpriteRender.flipX = false;
 			
 			//Animation
-			playerAnimator.SetBool("walkFront",false);
-			playerAnimator.SetBool("walkBack",true);
+			playerAnimator.SetBool("walkFront",true);
+			playerAnimator.SetBool("walkBack",false);
 			playerAnimator.SetBool("walkSide",false);
 		}
 		else if(rbPlayer.transform.position.y < mouseTargetPosition.y)
 		{
 			//Sprite
-			playerSpriteRender.sprite = playerSpriteUP;
+			playerSpriteRender.sprite = playerSpriteBack;
 			playerSpriteRender.flipX = false;
 
 			//Animation
-			playerAnimator.SetBool("walkFront",true);
-			playerAnimator.SetBool("walkBack",false);
+			playerAnimator.SetBool("walkFront",false);
+			playerAnimator.SetBool("walkBack",true);
 			playerAnimator.SetBool("walkSide",false);
 		}
 		
