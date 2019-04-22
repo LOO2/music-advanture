@@ -6,10 +6,13 @@ public class PlayerHealth : MonoBehaviour {
 	
 	public int health;
 	private bool isEnemy;
+
+	private Rigidbody2D rbPlayer;
 	
 	void Start ()
 	{
 		isEnemy = false;
+		rbPlayer.GetComponent<Rigidbody2D>();
 	}
 	
 	void Update ()
@@ -41,6 +44,12 @@ public class PlayerHealth : MonoBehaviour {
 		health -= 1;
 		if(health <= 0)
 			Die();
+		else
+		{
+			gameObject.SetActive(true);
+			//yield return new WaitForSeconds(0.1f);
+			gameObject.SetActive(false);
+		}
 	}
 
 	void Die()
