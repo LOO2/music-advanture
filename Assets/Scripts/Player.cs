@@ -46,6 +46,7 @@ public class Player : MonoBehaviour {
 	void Update () 
 	{
 
+		
 		//mouse movement
 		if(Input.GetKeyDown(KeyCode.Mouse1))
 		{
