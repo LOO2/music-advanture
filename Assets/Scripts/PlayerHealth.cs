@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour {
 	
-	public int health; 
-	private float posZ;
+	public int health;
+	private bool isEnemy;
 	
 	void Start ()
 	{
-		posZ = transform.rotation.z;
+		isEnemy = false;
 	}
 	
 	void Update ()
@@ -19,6 +19,33 @@ public class PlayerHealth : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D collision)
 	{
-		transform.rotation = Quaternion.Euler(0, 0, 0);
+		
+		if(IsEnemy(collision))
+		{
+			Damage();	
+		}
+
+		isEnemy = false;
 	}
+
+	bool IsEnemy(Collision2D collision)
+	{
+		if(collision.gameObject.CompareTag("Enemy"))
+			return true;
+		else
+			return false;
+	}
+
+	void Damage()
+	{
+		health -= 1;
+		if(health <= 0)
+			Die();
+	}
+
+	void Die()
+	{
+		Destroy(gameObject);
+	}
+	
 }
