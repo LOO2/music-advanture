@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
-
+	
 	public float moveSpeed;
-
 	private Vector3 initialPosition;
 	private Rigidbody2D rbPlayer;
-	
 	private Vector3 mouseTargetPosition;
 
 	//sprites
@@ -17,12 +15,12 @@ public class Player : MonoBehaviour {
 	public Sprite playerSpriteBack;
 	public Sprite playerSpriteFront;
 	
-	//Animation
+	//animation
 	Animator playerAnimator;
 
 	void Start () 
 	{
-		initialPosition = new Vector3(-5,0,0);
+		initialPosition = new Vector3(-6,0,0);
 		transform.position = initialPosition;
 
 		mouseTargetPosition = initialPosition;
@@ -36,7 +34,7 @@ public class Player : MonoBehaviour {
 			playerSpriteRender.sprite = playerSpriteSide;
 		}
 
-		//Animation
+		//animation
 		playerAnimator = GetComponent<Animator>();
 	}
 	
@@ -47,8 +45,6 @@ public class Player : MonoBehaviour {
 
 	void Update () 
 	{
-
-		
 
 		//mouse movement
 		if(Input.GetKeyDown(KeyCode.Mouse1))
@@ -61,11 +57,11 @@ public class Player : MonoBehaviour {
 
 		if(rbPlayer.transform.position.y == mouseTargetPosition.y || rbPlayer.transform.position.x == mouseTargetPosition.x)
 		{
-			//Sprite
+			//sprite
 			playerSpriteRender.sprite = playerSpriteBack;
 			playerSpriteRender.flipX = false;
 
-			//Animation
+			//animation
 			playerAnimator.SetBool("walkFront",false);
 			playerAnimator.SetBool("walkBack",false);
 			playerAnimator.SetBool("walkSide",false);
@@ -84,22 +80,22 @@ public class Player : MonoBehaviour {
 
 		if(rbPlayer.transform.position.x > mouseTargetPosition.x)
 		{
-			//Sprite
+			//sprite
 			playerSpriteRender.sprite = playerSpriteSide;
 			playerSpriteRender.flipX = true;
 
-			//Animation
+			//animation
 			playerAnimator.SetBool("walkFront",false);
 			playerAnimator.SetBool("walkBack",false);
 			playerAnimator.SetBool("walkSide",true);
 		}
 		else if(rbPlayer.transform.position.x < mouseTargetPosition.x)
 		{
-			//Sprite
+			//sprite
 			playerSpriteRender.sprite = playerSpriteSide;
 			playerSpriteRender.flipX = false;
 
-			//Animation
+			//animation
 			playerAnimator.SetBool("walkFront",false);
 			playerAnimator.SetBool("walkBack",false);
 			playerAnimator.SetBool("walkSide",true);
@@ -107,22 +103,22 @@ public class Player : MonoBehaviour {
 
 		if(rbPlayer.transform.position.y > mouseTargetPosition.y)
 		{
-			//Sprite
+			//sprite
 			playerSpriteRender.sprite = playerSpriteFront;
 			playerSpriteRender.flipX = false;
 			
-			//Animation
+			//animation
 			playerAnimator.SetBool("walkFront",true);
 			playerAnimator.SetBool("walkBack",false);
 			playerAnimator.SetBool("walkSide",false);
 		}
 		else if(rbPlayer.transform.position.y < mouseTargetPosition.y)
 		{
-			//Sprite
+			//sprite
 			playerSpriteRender.sprite = playerSpriteBack;
 			playerSpriteRender.flipX = false;
 
-			//Animation
+			//animation
 			playerAnimator.SetBool("walkFront",false);
 			playerAnimator.SetBool("walkBack",true);
 			playerAnimator.SetBool("walkSide",false);
