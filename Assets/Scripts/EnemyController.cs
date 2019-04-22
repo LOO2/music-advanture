@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour {
+public class EnemyController : MonoBehaviour {
 
 	public float moveSpeed;
 	private Vector3 initialPosition;
-	public float countDown = 3.0f;
+	public float countDown = 2.0f;
 	private Vector3 targetPosition;
 	private bool canMove;
 	private Rigidbody2D rbEnemy;
@@ -25,12 +25,10 @@ public class Enemy : MonoBehaviour {
 
 		if(canMove)
 		{
-			targetPosition = new Vector3(Random.Range(-8,8),Random.Range(-4,5),transform.position.z);
-			Debug.Log(targetPosition);
+			targetPosition = new Vector3(Random.Range(-7,8),Random.Range(-4,6),transform.position.z);
 			canMove = false;
-			countDown = 3.0f;
+			countDown = 2.0f;
 		}
-
 		transform.position = Vector3.MoveTowards(transform.position, targetPosition,moveSpeed * Time.deltaTime);
 		
 	}
