@@ -1759,5 +1759,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   life: 3
-  hearthOn: {fileID: 1766923948667754, guid: 91f91f91845b5014f8928e00c17178c7, type: 2}
-  hearthOff: {fileID: 1270994484048160, guid: 0e4dac621dbde7448a7de36c83255df2, type: 2}
+  hearth: {fileID: 1270994484048160, guid: 0e4dac621dbde7448a7de36c83255df2, type: 2}

@@ -13,9 +13,14 @@ public class PlayerHealth : MonoBehaviour {
 	
 
 	//RENDER HEARTS SPRITE
-	public GameObject hearthOn;
-	public GameObject hearthOff;
+	public GameObject hearth;
 	private Vector3 hearthPosition;
+	private GameObject[] instanceHearth;
+	private float[] instanceHearthPosX;
+	private bool loseLife;
+	private Sprite spriteOn;
+	private Sprite spriteOff;
+	private SpriteRenderer hearthSprite;
 
 	//REFATORAR
 	private int i = 0;
@@ -23,12 +28,22 @@ public class PlayerHealth : MonoBehaviour {
 
 	void Start ()
 	{
+		loseLife = false;
 		isEnemy = false;
 		rbPlayer = GetComponent<Rigidbody2D>();
+
+		//Sprite
+		spriteOn = Resources.Load("Sprites/hearts-1", typeof(Sprite)) as Sprite;
+		spriteOff = Resources.Load("Sprites/hearts-2", typeof(Sprite)) as Sprite;
+
+		//Position
+		instanceHearth = new GameObject[10];
+		instanceHearthPosX = new float[10];
 		hearthPosition = new Vector3(9.3f,4,0);
 		for(int i = 0; i < life; i++)
 		{	
-			Instantiate(hearthOn, hearthPosition,Quaternion.identity);
+			instanceHearth[i] = Instantiate(hearth, hearthPosition,Quaternion.identity) as GameObject;
+			instanceHearthPosX[i] = instanceHearth[i].transform.position.x;
 			hearthPosition.x = hearthPosition.x - 1.5f;
 		}
 		
@@ -60,11 +75,15 @@ public class PlayerHealth : MonoBehaviour {
 
 	void Damage()
 	{
+		loseLife = true;
 		life -= 1;
 		if(life <= -0)
 			Die();
 		else
 		{
+			RenderHealth(loseLife);
+			loseLife = false;
+
 			//StartCoroutine(FlashingDamage());
 		}
 		
@@ -73,6 +92,35 @@ public class PlayerHealth : MonoBehaviour {
 	void Die()
 	{
 		Destroy(gameObject);
+	}
+
+	void RenderHealth(bool loseLife)
+	{
+		if(loseLife)
+		{
+			foreach(GameObject item in instanceHearth)
+			{
+				if(item.transform.position.x == MinFloatValue(instanceHearthPosX))
+				{
+					hearthSprite = item.GetComponent<SpriteRenderer>();
+					hearthSprite.sprite = spriteOff;
+				}
+			}
+		}
+	}
+
+	float MinFloatValue(float[] arrayValues)
+	{
+		float min = 100.0f;
+		for (i = 1; i < arrayValues.Length; i++) 
+		{
+			//refatorar, retirar condição arrayValues[i] != 0
+			if (arrayValues[i] < min && arrayValues[i] != 0)
+			{
+				min = arrayValues[i];
+			}
+		}
+		return min;
 	}
 
 	//REFATORAR---------------
