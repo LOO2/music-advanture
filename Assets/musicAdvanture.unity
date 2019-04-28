@@ -1486,7 +1486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  countDown: 3
+  delayMovement: 2
 --- !u!61 &2063971448
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1758,4 +1758,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fbc3ca246e971e4694f4e910c68ed48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
+  life: 3
+  hearthOn: {fileID: 1766923948667754, guid: 91f91f91845b5014f8928e00c17178c7, type: 2}
+  hearthOff: {fileID: 1270994484048160, guid: 0e4dac621dbde7448a7de36c83255df2, type: 2}

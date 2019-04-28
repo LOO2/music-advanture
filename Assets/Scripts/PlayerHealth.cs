@@ -4,15 +4,34 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour {
 	
-	public int health;
+	public int life;
 	private bool isEnemy;
 
 	private Rigidbody2D rbPlayer;
+
+	private float delayImmortal;
 	
+
+	//RENDER HEARTS SPRITE
+	public GameObject hearthOn;
+	public GameObject hearthOff;
+	private Vector3 hearthPosition;
+
+	//REFATORAR
+	private int i = 0;
+	private bool active = false;
+
 	void Start ()
 	{
 		isEnemy = false;
-		rbPlayer.GetComponent<Rigidbody2D>();
+		rbPlayer = GetComponent<Rigidbody2D>();
+		hearthPosition = new Vector3(9.3f,4,0);
+		for(int i = 0; i < life; i++)
+		{	
+			Instantiate(hearthOn, hearthPosition,Quaternion.identity);
+			hearthPosition.x = hearthPosition.x - 1.5f;
+		}
+		
 	}
 	
 	void Update ()
@@ -25,7 +44,7 @@ public class PlayerHealth : MonoBehaviour {
 		
 		if(IsEnemy(collision))
 		{
-			Damage();	
+			Damage();
 		}
 
 		isEnemy = false;
@@ -41,20 +60,34 @@ public class PlayerHealth : MonoBehaviour {
 
 	void Damage()
 	{
-		health -= 1;
-		if(health <= 0)
+		life -= 1;
+		if(life <= -0)
 			Die();
 		else
 		{
-			gameObject.SetActive(true);
-			//yield return new WaitForSeconds(0.1f);
-			gameObject.SetActive(false);
+			//StartCoroutine(FlashingDamage());
 		}
+		
 	}
 
 	void Die()
 	{
 		Destroy(gameObject);
+	}
+
+	//REFATORAR---------------
+	IEnumerator FlashingDamage()
+	{	
+		i += 1;
+		active = !active;
+		if(i<5){
+			Debug.Log(active);
+			gameObject.GetComponent<Renderer>().enabled = active;
+			gameObject.SetActive(active);
+			yield return new WaitForSeconds(0.5f);
+			StartCoroutine(FlashingDamage());
+		}
+		gameObject.SetActive(true);
 	}
 	
 }
