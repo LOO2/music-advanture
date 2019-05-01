@@ -17,7 +17,6 @@ public class PlayerHealth : MonoBehaviour {
 	private Vector3 hearthPosition;
 	private GameObject[] instanceHearth;
 	private float[] instanceHearthPosX;
-	private bool loseLife;
 	private Sprite spriteOn;
 	private Sprite spriteOff;
 	private SpriteRenderer hearthSprite;
@@ -28,7 +27,6 @@ public class PlayerHealth : MonoBehaviour {
 
 	void Start ()
 	{
-		loseLife = false;
 		isEnemy = false;
 		rbPlayer = GetComponent<Rigidbody2D>();
 
@@ -75,15 +73,13 @@ public class PlayerHealth : MonoBehaviour {
 
 	void Damage()
 	{
-		loseLife = true;
 		life -= 1;
 		if(life <= -0)
 			Die();
 		else
 		{
-			RenderHealth(loseLife);
-			loseLife = false;
-
+			RenderHealth();
+			
 			//StartCoroutine(FlashingDamage());
 		}
 		
@@ -94,17 +90,14 @@ public class PlayerHealth : MonoBehaviour {
 		Destroy(gameObject);
 	}
 
-	void RenderHealth(bool loseLife)
+	void RenderHealth()
 	{
-		if(loseLife)
+		foreach(GameObject item in instanceHearth)
 		{
-			foreach(GameObject item in instanceHearth)
+			if(item.transform.position.x == MinFloatValue(instanceHearthPosX))
 			{
-				if(item.transform.position.x == MinFloatValue(instanceHearthPosX))
-				{
-					hearthSprite = item.GetComponent<SpriteRenderer>();
-					hearthSprite.sprite = spriteOff;
-				}
+				hearthSprite = item.GetComponent<SpriteRenderer>();
+				hearthSprite.sprite = spriteOff;
 			}
 		}
 	}
