@@ -1,50 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour {
 	
-	public int life;
 	private bool isEnemy;
 
 	private Rigidbody2D rbPlayer;
 
 	private float delayImmortal;
 	
+	//RENDER HEARTS
+	public int health;
+	public int numOfHearts;
 
-	//RENDER HEARTS SPRITE
-	public GameObject hearth;
-	private Vector3 hearthPosition;
-	private GameObject[] instanceHearth;
-	private float[] instanceHearthPosX;
-	private Sprite spriteOn;
-	private Sprite spriteOff;
-	private SpriteRenderer hearthSprite;
+	public Image[] hearts;
+	public Sprite fullHeart;
+	public Sprite emptyHeart;
 
-	//REFATORAR
-	private int i = 0;
-	private bool active = false;
-
+	
 	void Start ()
 	{
 		isEnemy = false;
 		rbPlayer = GetComponent<Rigidbody2D>();
 
-		//Sprite
-		spriteOn = Resources.Load("Sprites/hearts-1", typeof(Sprite)) as Sprite;
-		spriteOff = Resources.Load("Sprites/hearts-2", typeof(Sprite)) as Sprite;
-
-		//Position
-		instanceHearth = new GameObject[10];
-		instanceHearthPosX = new float[10];
-		hearthPosition = new Vector3(9.3f,4,0);
-		for(int i = 0; i < life; i++)
-		{	
-			instanceHearth[i] = Instantiate(hearth, hearthPosition,Quaternion.identity) as GameObject;
-			instanceHearthPosX[i] = instanceHearth[i].transform.position.x;
-			hearthPosition.x = hearthPosition.x - 1.5f;
-		}
-		
+		RenderHearts();		
 	}
 	
 	void Update ()
@@ -73,12 +54,12 @@ public class PlayerHealth : MonoBehaviour {
 
 	void Damage()
 	{
-		life -= 1;
-		if(life <= -0)
+		health -= 1;
+		if(health <= 0)
 			Die();
 		else
 		{
-			RenderHealth();
+			RenderHearts();
 			
 			//StartCoroutine(FlashingDamage());
 		}
@@ -90,45 +71,29 @@ public class PlayerHealth : MonoBehaviour {
 		Destroy(gameObject);
 	}
 
-	void RenderHealth()
+	void RenderHearts()
 	{
-		foreach(GameObject item in instanceHearth)
+		for (int i = 0; i < hearts.Length; i++)
 		{
-			if(item.transform.position.x == MinFloatValue(instanceHearthPosX))
+
+			if(i < health)
 			{
-				hearthSprite = item.GetComponent<SpriteRenderer>();
-				hearthSprite.sprite = spriteOff;
+				hearts[i].sprite = fullHeart;
+			}
+			else
+			{
+				hearts[i].sprite = emptyHeart;
+			}
+
+			if(i < numOfHearts)
+			{
+				hearts[i].enabled = true;
+			}
+			else
+			{
+				hearts[i].enabled = false;
 			}
 		}
 	}
 
-	float MinFloatValue(float[] arrayValues)
-	{
-		float min = 100.0f;
-		for (i = 1; i < arrayValues.Length; i++) 
-		{
-			//refatorar, retirar condição arrayValues[i] != 0
-			if (arrayValues[i] < min && arrayValues[i] != 0)
-			{
-				min = arrayValues[i];
-			}
-		}
-		return min;
-	}
-
-	//REFATORAR---------------
-	IEnumerator FlashingDamage()
-	{	
-		i += 1;
-		active = !active;
-		if(i<5){
-			Debug.Log(active);
-			gameObject.GetComponent<Renderer>().enabled = active;
-			gameObject.SetActive(active);
-			yield return new WaitForSeconds(0.5f);
-			StartCoroutine(FlashingDamage());
-		}
-		gameObject.SetActive(true);
-	}
-	
 }

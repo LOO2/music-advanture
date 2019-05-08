@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - heartOff
+  - heartOn
   layers:
   - Default
   - TransparentFX
@@ -16,7 +18,7 @@ TagManager:
   - 
   - Player
   - Ground
-  - 
+  - Front
   - 
   - 
   - 
@@ -47,4 +49,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 52421389
+    locked: 0
+  - name: Front
+    uniqueID: 3254305571
     locked: 0
