@@ -72,10 +72,10 @@ public class PlayerController : MonoBehaviour {
 
 	}
 
-	void ChangeTheDamnSprite (Vector3 distancePlayTarget)
+	void ChangeTheDamnSprite (Vector3 distancePlayerTarget)
 	{
-		//distancePlayTarget = mouseTargetPosition - rbPlayer.transform.position;
-		//Debug.Log(Mathf.Max(rbPlayer.transform.position.x, distancePlayTarget.x));
+		//distancePlayerTarget = mouseTargetPosition - rbPlayer.transform.position;
+		//Debug.Log(Mathf.Max(rbPlayer.transform.position.x, distancePlayerTarget.x));
 
 		if(rbPlayer.transform.position.x > mouseTargetPosition.x)
 		{

@@ -55,15 +55,9 @@ public class PlayerHealth : MonoBehaviour {
 	void Damage()
 	{
 		health -= 1;
+		RenderHearts();
 		if(health <= 0)
 			Die();
-		else
-		{
-			RenderHearts();
-			
-			//StartCoroutine(FlashingDamage());
-		}
-		
 	}
 
 	void Die()
@@ -95,5 +89,6 @@ public class PlayerHealth : MonoBehaviour {
 			}
 		}
 	}
+
 
 }
