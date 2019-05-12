@@ -20,8 +20,8 @@ public class GameOverController : MonoBehaviour {
 			anim.SetTrigger("GameOver");
 			restartTime += Time.deltaTime;
 			if (restartTime >= restartDelay)
-			{
-				//Application.LoadLevel(Application.loadedLevel);
+			{	
+				Application.LoadLevel(Application.loadedLevel);
 			}
 		}
 	}
