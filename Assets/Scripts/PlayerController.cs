@@ -4,38 +4,32 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 	
-	public float moveSpeed;
+	private People peoplePlayer;
 	private Vector3 initialPosition;
-	private Rigidbody2D rbPlayer;
-	private Vector3 mouseTargetPosition;
-
-	//sprites
-	private SpriteRenderer playerSpriteRender; 
-	public Sprite playerSpriteSide;
-	public Sprite playerSpriteBack;
-	public Sprite playerSpriteFront;
 	
-	//animation
-	Animator playerAnimator;
+	private Vector3 mouseTargetPosition;
 
 	void Start () 
 	{
+		peoplePlayer = new People();
+		peoplePlayer.speed = 10.0f;
+		
 		initialPosition = new Vector3(-6,0,0);
 		transform.position = initialPosition;
 
 		mouseTargetPosition = initialPosition;
-
-		rbPlayer = GetComponent<Rigidbody2D>();
+		peoplePlayer.rbPeople = GetComponent<Rigidbody2D>();
 
 		//sprites 
-		playerSpriteRender = GetComponent<SpriteRenderer>();
-		if(playerSpriteRender.sprite == null)
+		peoplePlayer.playerSpriteRender = GetComponent<SpriteRenderer>();
+		if(peoplePlayer.playerSpriteRender.sprite == null)
 		{
-			playerSpriteRender.sprite = playerSpriteSide;
+			//playerSpriteRender.sprite = playerSpriteSide;
+			peoplePlayer.playerSpriteRender.sprite = peoplePlayer.playerSpriteSide;
 		}
 
 		//animation
-		playerAnimator = GetComponent<Animator>();
+		peoplePlayer.playerAnimator = GetComponent<Animator>();
 	}
 	
 	void FixedUpdate ()
@@ -52,18 +46,18 @@ public class PlayerController : MonoBehaviour {
 			mouseTargetPosition.z = transform.position.z;
 			ChangeTheDamnSprite(mouseTargetPosition);
 		}
-        transform.position = Vector3.MoveTowards(transform.position, mouseTargetPosition, moveSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, mouseTargetPosition, peoplePlayer.speed * Time.deltaTime);
 
-		if(rbPlayer.transform.position.y == mouseTargetPosition.y || rbPlayer.transform.position.x == mouseTargetPosition.x)
+		if(peoplePlayer.rbPeople.transform.position.y == mouseTargetPosition.y || peoplePlayer.rbPeople.transform.position.x == mouseTargetPosition.x)
 		{
 			//sprite
-			playerSpriteRender.sprite = playerSpriteBack;
-			playerSpriteRender.flipX = false;
+			peoplePlayer.playerSpriteRender.sprite = peoplePlayer.playerSpriteBack;
+			peoplePlayer.playerSpriteRender.flipX = false;
 
 			//animation
-			playerAnimator.SetBool("walkFront",false);
-			playerAnimator.SetBool("walkBack",false);
-			playerAnimator.SetBool("walkSide",false);
+			peoplePlayer.playerAnimator.SetBool("walkFront",false);
+			peoplePlayer.playerAnimator.SetBool("walkBack",false);
+			peoplePlayer.playerAnimator.SetBool("walkSide",false);
 		}
 	}
 
@@ -74,57 +68,50 @@ public class PlayerController : MonoBehaviour {
 
 	void ChangeTheDamnSprite (Vector3 distancePlayerTarget)
 	{
-		//distancePlayerTarget = mouseTargetPosition - rbPlayer.transform.position;
-		//Debug.Log(Mathf.Max(rbPlayer.transform.position.x, distancePlayerTarget.x));
-
-		if(rbPlayer.transform.position.x > mouseTargetPosition.x)
+		if(peoplePlayer.rbPeople.transform.position.x > mouseTargetPosition.x)
 		{
 			//sprite
-			playerSpriteRender.sprite = playerSpriteSide;
-			playerSpriteRender.flipX = true;
+			peoplePlayer.playerSpriteRender.sprite = peoplePlayer.playerSpriteSide;
+			peoplePlayer.playerSpriteRender.flipX = true;
 
 			//animation
-			playerAnimator.SetBool("walkFront",false);
-			playerAnimator.SetBool("walkBack",false);
-			playerAnimator.SetBool("walkSide",true);
+			peoplePlayer.playerAnimator.SetBool("walkFront",false);
+			peoplePlayer.playerAnimator.SetBool("walkBack",false);
+			peoplePlayer.playerAnimator.SetBool("walkSide",true);
 		}
-		else if(rbPlayer.transform.position.x < mouseTargetPosition.x)
+		else if(peoplePlayer.rbPeople.transform.position.x < mouseTargetPosition.x)
 		{
 			//sprite
-			playerSpriteRender.sprite = playerSpriteSide;
-			playerSpriteRender.flipX = false;
+			peoplePlayer.playerSpriteRender.sprite = peoplePlayer.playerSpriteSide;
+			peoplePlayer.playerSpriteRender.flipX = false;
 
 			//animation
-			playerAnimator.SetBool("walkFront",false);
-			playerAnimator.SetBool("walkBack",false);
-			playerAnimator.SetBool("walkSide",true);
+			peoplePlayer.playerAnimator.SetBool("walkFront",false);
+			peoplePlayer.playerAnimator.SetBool("walkBack",false);
+			peoplePlayer.playerAnimator.SetBool("walkSide",true);
 		}
-
-		if(rbPlayer.transform.position.y > mouseTargetPosition.y)
+		if(peoplePlayer.rbPeople.transform.position.y > mouseTargetPosition.y)
 		{
 			//sprite
-			playerSpriteRender.sprite = playerSpriteFront;
-			playerSpriteRender.flipX = false;
+			peoplePlayer.playerSpriteRender.sprite = peoplePlayer.playerSpriteFront;
+			peoplePlayer.playerSpriteRender.flipX = false;
 			
 			//animation
-			playerAnimator.SetBool("walkFront",true);
-			playerAnimator.SetBool("walkBack",false);
-			playerAnimator.SetBool("walkSide",false);
+			peoplePlayer.playerAnimator.SetBool("walkFront",true);
+			peoplePlayer.playerAnimator.SetBool("walkBack",false);
+			peoplePlayer.playerAnimator.SetBool("walkSide",false);
 		}
-		else if(rbPlayer.transform.position.y < mouseTargetPosition.y)
+		else if(peoplePlayer.rbPeople.transform.position.y < mouseTargetPosition.y)
 		{
 			//sprite
-			playerSpriteRender.sprite = playerSpriteBack;
-			playerSpriteRender.flipX = false;
+			peoplePlayer.playerSpriteRender.sprite = peoplePlayer.playerSpriteBack;
+			peoplePlayer.playerSpriteRender.flipX = false;
 
 			//animation
-			playerAnimator.SetBool("walkFront",false);
-			playerAnimator.SetBool("walkBack",true);
-			playerAnimator.SetBool("walkSide",false);
+			peoplePlayer.playerAnimator.SetBool("walkFront",false);
+			peoplePlayer.playerAnimator.SetBool("walkBack",true);
+			peoplePlayer.playerAnimator.SetBool("walkSide",false);
 		}
-		
 	}
-
-	
 	
 }

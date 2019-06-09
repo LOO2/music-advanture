@@ -2104,7 +2104,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: -0.000030517578}
+  m_AnchoredPosition: {x: -0.000061035156, y: 0}
   m_SizeDelta: {x: 0.00012207, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1994681299
@@ -2170,7 +2170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b5629e1e2e846c47b208d5969ef2810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
   delayMovement: 2
 --- !u!61 &2063971448
 BoxCollider2D:
@@ -2365,10 +2364,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 879789559dd43de4bae339542171e2dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  playerSpriteSide: {fileID: 0}
-  playerSpriteBack: {fileID: 0}
-  playerSpriteFront: {fileID: 0}
 --- !u!50 &2068866493
 Rigidbody2D:
   serializedVersion: 4
@@ -2446,8 +2441,8 @@ MonoBehaviour:
   health: 3
   numOfHearts: 3
   hearts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1140788441}
+  - {fileID: 887544953}
+  - {fileID: 404799668}
   fullHeart: {fileID: 21300000, guid: 8f03d65eca65243d0963f648c2e9824a, type: 3}
   emptyHeart: {fileID: 21300000, guid: af1d44c8d77c341869dcdb0b63c5cff8, type: 3}
