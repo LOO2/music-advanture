@@ -2098,7 +2098,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 1731813088139232, guid: cbd97933614fb9f459d3856b5d4c154e, type: 2}
-  bulletPoint: {fileID: 0}
   shotDelay: 1
   damage: 10
 --- !u!4 &1938378034

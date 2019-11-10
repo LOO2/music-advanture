@@ -6,7 +6,7 @@ public class Shot : MonoBehaviour {
 
 	//shot
 	public GameObject bullet;
-	public Transform bulletPoint;
+	private Transform bulletPoint;
 	private Transform bulletTarget;
 	private float bulletSpeed = 10.0f;
 	public float shotDelay = 1.0f;
@@ -14,7 +14,7 @@ public class Shot : MonoBehaviour {
 	public int damage;
 
 	void Start () {
-		
+		GetComponent<Rigidbody>().velocity = transform.forward;
 	}
 	
 	// Update is called once per frame
@@ -35,9 +35,15 @@ public class Shot : MonoBehaviour {
 	public void Fire()
 	{
 		GameObject bulletClone = (GameObject)Instantiate(bullet, bulletPoint.position, Quaternion.identity);
-		//Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
-		//bulletRb.AddForce(bulletTarget.position);
+		bulletClone.transform.parent = GameObject.Find("bullet").transform;
 
-		bulletClone.transform.position = bulletPoint.position;
+		Rigidbody bulletRb = GetComponent<Rigidbody>();
+		//bulletRb.AddForce(GetComponent<Rigidbody>().position,ForceMode.Acceleration);
+
+		bulletClone.transform.position = Vector3.MoveTowards(
+			bulletPoint.position, 
+			bulletTarget.position, 
+			bulletSpeed * Time.deltaTime
+		);
 	}
 }
