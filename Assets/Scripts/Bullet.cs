@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour {
 
 	void Start()
 	{
-		bulletSpeed = 30.0f;
+		bulletSpeed = 40.0f;
 		this.transform.parent = GameObject.Find("Shot").transform;
 		bulletRb = GetComponent<Rigidbody>();
 	}
@@ -25,6 +25,10 @@ public class Bullet : MonoBehaviour {
 		transform.position = Vector3.MoveTowards(
 			transform.position, bulletTarget.position, bulletSpeed * Time.deltaTime
 		);
+
+		if(transform.position == bulletTarget.position)
+			Destroy(gameObject);
+
 	}
 
 }
