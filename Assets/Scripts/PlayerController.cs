@@ -39,6 +39,9 @@ public class PlayerController : MonoBehaviour {
 
 	void Update () 
 	{
+		//attack
+		peoplePlayer.Attack();
+
 		//mouse movement
 		if(Input.GetKeyDown(KeyCode.Mouse1))
 		{
@@ -63,7 +66,7 @@ public class PlayerController : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D collision)
 	{
-
+		
 	}
 
 	void ChangeTheDamnSprite (Vector3 distancePlayerTarget)

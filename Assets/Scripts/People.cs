@@ -9,7 +9,6 @@ public class People : MonoBehaviour {
 	public Sprite sprite;
 	public int hp;
 	public float speed;
-	public int damage;
 	public bool canMove;
 
 	//sprites
@@ -24,6 +23,7 @@ public class People : MonoBehaviour {
 
 	}
 
+	
 	public void Attack(){
 
 	}
