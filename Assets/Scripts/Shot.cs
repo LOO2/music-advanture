@@ -9,7 +9,7 @@ public class Shot : MonoBehaviour {
 	private Transform bulletPoint;
 	private Transform bulletTarget;
 	private float bulletSpeed = 10.0f;
-	public float shotDelay = 1.0f;
+	private float shotDelay = 1.0f;
 	private float shotCounter;
 	public int damage;
 
@@ -32,18 +32,8 @@ public class Shot : MonoBehaviour {
 		
 	}
 
-	public void Fire()
+	private void Fire()
 	{
 		GameObject bulletClone = (GameObject)Instantiate(bullet, bulletPoint.position, Quaternion.identity);
-		bulletClone.transform.parent = GameObject.Find("bullet").transform;
-
-		Rigidbody bulletRb = GetComponent<Rigidbody>();
-		//bulletRb.AddForce(GetComponent<Rigidbody>().position,ForceMode.Acceleration);
-
-		bulletClone.transform.position = Vector3.MoveTowards(
-			bulletPoint.position, 
-			bulletTarget.position, 
-			bulletSpeed * Time.deltaTime
-		);
 	}
 }
