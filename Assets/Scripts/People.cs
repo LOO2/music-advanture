@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class People : MonoBehaviour {
+public class People{
 
-	public Rigidbody2D rbPeople;
-	public string nickname;
-	public Sprite sprite;
+	//public string nickname;
+	//public Sprite sprite;
 	public int hp;
 	public float speed;
-	public bool canMove;
+
 
 	//sprites
 	public SpriteRenderer playerSpriteRender; 
@@ -33,7 +32,7 @@ public class People : MonoBehaviour {
 	}
 
 	public void Die(){
-		Destroy(this.gameObject);
+		//Destroy(this.gameObject);
 	}
 
 }

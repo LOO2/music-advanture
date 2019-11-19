@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class Player : MonoBehaviour {
 	
-	private People peoplePlayer;
+	private Rigidbody2D rbPlayer;
+	
+	public People peoplePlayer;
 	private Vector3 initialPosition;
 	
 	private Vector3 mouseTargetPosition;
@@ -18,7 +20,7 @@ public class PlayerController : MonoBehaviour {
 		transform.position = initialPosition;
 
 		mouseTargetPosition = initialPosition;
-		peoplePlayer.rbPeople = GetComponent<Rigidbody2D>();
+		rbPlayer = GetComponent<Rigidbody2D>();
 
 		//sprites 
 		peoplePlayer.playerSpriteRender = GetComponent<SpriteRenderer>();
@@ -51,7 +53,7 @@ public class PlayerController : MonoBehaviour {
 		}
         transform.position = Vector3.MoveTowards(transform.position, mouseTargetPosition, peoplePlayer.speed * Time.deltaTime);
 
-		if(peoplePlayer.rbPeople.transform.position.y == mouseTargetPosition.y || peoplePlayer.rbPeople.transform.position.x == mouseTargetPosition.x)
+		if(rbPlayer.transform.position.y == mouseTargetPosition.y || rbPlayer.transform.position.x == mouseTargetPosition.x)
 		{
 			//sprite
 			peoplePlayer.playerSpriteRender.sprite = peoplePlayer.playerSpriteBack;
@@ -69,9 +71,10 @@ public class PlayerController : MonoBehaviour {
 		
 	}
 
+	//Sprite
 	void ChangeTheDamnSprite (Vector3 distancePlayerTarget)
 	{
-		if(peoplePlayer.rbPeople.transform.position.x > mouseTargetPosition.x)
+		if(rbPlayer.transform.position.x > mouseTargetPosition.x)
 		{
 			//sprite
 			peoplePlayer.playerSpriteRender.sprite = peoplePlayer.playerSpriteSide;
@@ -82,7 +85,7 @@ public class PlayerController : MonoBehaviour {
 			peoplePlayer.playerAnimator.SetBool("walkBack",false);
 			peoplePlayer.playerAnimator.SetBool("walkSide",true);
 		}
-		else if(peoplePlayer.rbPeople.transform.position.x < mouseTargetPosition.x)
+		else if(rbPlayer.transform.position.x < mouseTargetPosition.x)
 		{
 			//sprite
 			peoplePlayer.playerSpriteRender.sprite = peoplePlayer.playerSpriteSide;
@@ -93,7 +96,7 @@ public class PlayerController : MonoBehaviour {
 			peoplePlayer.playerAnimator.SetBool("walkBack",false);
 			peoplePlayer.playerAnimator.SetBool("walkSide",true);
 		}
-		if(peoplePlayer.rbPeople.transform.position.y > mouseTargetPosition.y)
+		if(rbPlayer.transform.position.y > mouseTargetPosition.y)
 		{
 			//sprite
 			peoplePlayer.playerSpriteRender.sprite = peoplePlayer.playerSpriteFront;
@@ -104,7 +107,7 @@ public class PlayerController : MonoBehaviour {
 			peoplePlayer.playerAnimator.SetBool("walkBack",false);
 			peoplePlayer.playerAnimator.SetBool("walkSide",false);
 		}
-		else if(peoplePlayer.rbPeople.transform.position.y < mouseTargetPosition.y)
+		else if(rbPlayer.transform.position.y < mouseTargetPosition.y)
 		{
 			//sprite
 			peoplePlayer.playerSpriteRender.sprite = peoplePlayer.playerSpriteBack;

@@ -294,7 +294,6 @@ GameObject:
   - component: {fileID: 332347816}
   - component: {fileID: 332347815}
   - component: {fileID: 332347814}
-  - component: {fileID: 332347817}
   m_Layer: 10
   m_Name: Restart
   m_TagString: Untagged
@@ -360,7 +359,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 332347817}
+      - m_Target: {fileID: 0}
         m_MethodName: RestartClick
         m_Mode: 1
         m_Arguments:
@@ -406,17 +405,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 332347812}
---- !u!114 &332347817
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 332347812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62fcbce27092fae4e9947d935678c0af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &404799666
 GameObject:
   m_ObjectHideFlags: 0
@@ -2080,8 +2068,9 @@ GameObject:
   - component: {fileID: 1938378034}
   - component: {fileID: 1938378033}
   - component: {fileID: 1938378035}
+  - component: {fileID: 1938378036}
   m_Layer: 0
-  m_Name: Shot
+  m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2098,9 +2087,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4316f8bc259e284e9300496212281b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 1731813088139232, guid: cbd97933614fb9f459d3856b5d4c154e, type: 2}
-  shotDelay: 1
-  damage: 0
 --- !u!4 &1938378034
 Transform:
   m_ObjectHideFlags: 0
@@ -2129,6 +2115,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1938378036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1938378032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d03a6dfe19437dd4893abe44ca912d64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 1731813088139232, guid: cbd97933614fb9f459d3856b5d4c154e, type: 2}
+  damage: 0
 --- !u!1 &1992245654
 GameObject:
   m_ObjectHideFlags: 0
@@ -2245,6 +2244,7 @@ GameObject:
   - component: {fileID: 2063971449}
   - component: {fileID: 2063971448}
   - component: {fileID: 2063971447}
+  - component: {fileID: 2063971453}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
@@ -2367,6 +2367,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2063971453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2063971446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad5f75a197d351b46bcb496740fa8d64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2068866489
 GameObject:
   m_ObjectHideFlags: 0
@@ -2457,6 +2468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 879789559dd43de4bae339542171e2dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  peoplePlayer: {fileID: 0}
 --- !u!50 &2068866493
 Rigidbody2D:
   serializedVersion: 4
@@ -2528,7 +2540,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2068866489}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fbc3ca246e971e4694f4e910c68ed48, type: 3}
+  m_Script: {fileID: 11500000, guid: c0ce0961a9dcd134ab1f598cd7ef185e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
