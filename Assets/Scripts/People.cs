@@ -27,8 +27,8 @@ public class People{
 
 	}
 
-	public void DamageHit(){
-
+	public void DamageHit(int damage){
+		this.hp = this.hp - damage;
 	}
 
 	public void Die(){

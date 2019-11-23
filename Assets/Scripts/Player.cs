@@ -15,6 +15,7 @@ public class Player : MonoBehaviour {
 	{
 		peoplePlayer = new People();
 		peoplePlayer.speed = 10.0f;
+		peoplePlayer.hp = 3;
 		
 		initialPosition = new Vector3(-6,0,0);
 		transform.position = initialPosition;
@@ -34,8 +35,22 @@ public class Player : MonoBehaviour {
 		peoplePlayer.playerAnimator = GetComponent<Animator>();
 	}
 	
-	void FixedUpdate ()
+	void OnCollisionEnter2D(Collision2D collision)
 	{
+		if(IsEnemy(collision))
+		{
+			peoplePlayer.DamageHit(1);
+		}
+	}
+
+	bool IsEnemy(Collision2D collision)
+	{
+		if(collision.gameObject.CompareTag("Enemy"))
+			return true;
+		//else if(collision.gameObject.CompareTag("Bullet"))
+		//	return true;
+		else
+			return false;
 		
 	}
 
@@ -64,11 +79,6 @@ public class Player : MonoBehaviour {
 			peoplePlayer.playerAnimator.SetBool("walkBack",false);
 			peoplePlayer.playerAnimator.SetBool("walkSide",false);
 		}
-	}
-
-	void OnCollisionEnter2D(Collision2D collision)
-	{
-		
 	}
 
 	//Sprite

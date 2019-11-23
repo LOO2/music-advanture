@@ -13,13 +13,14 @@ public class Damage : MonoBehaviour {
 
 	void Start ()
 	{
-		player = GameObject.Find("player").GetComponent<Player>().peoplePlayer;
+		player = GameObject.Find("Player").GetComponent<Player>().peoplePlayer;
 		playerHealth = player.hp;
 		isEnemy = false;
 	}
 
 	void OnCollisionEnter2D(Collision2D collision)
 	{
+		
 		if(IsEnemy(collision))
 		{
 			DamageOn();
