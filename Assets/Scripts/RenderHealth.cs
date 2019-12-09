@@ -23,15 +23,16 @@ public class RenderHealth : MonoBehaviour {
 		player = GameObject.Find("Player").GetComponent<Player>().peoplePlayer;
 		playerHealth = player.hp;
 
-		RenderHearts();
+		RenderHearts(playerHealth);
 	}
 
 	
 
-	public void RenderHearts()
+	public void RenderHearts(int playerHealth)
 	{
 		for (int i = 0; i < hearts.Length; i++)
 		{
+			
 
 			if(i < playerHealth)
 			{

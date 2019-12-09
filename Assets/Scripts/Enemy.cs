@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-	private People playerEnemy;
+	private People peopleEnemy;
 	private Vector3 initialPosition;
 	public float delayMovement = 2.0f;
 	private Vector3 targetPosition;
@@ -12,15 +12,16 @@ public class Enemy : MonoBehaviour {
 	
 	//0 = morto
 	//1 = vivo
-	private int state;
+	//private int state;
 
 	void Start () 
 	{
-		playerEnemy = new People();
-		playerEnemy.speed = 10.0f;
+		peopleEnemy = new People();
+		peopleEnemy.speed = 10.0f;
 		
 		initialPosition = new Vector3(6.3f,3.6f,0);
 		transform.position = initialPosition;
+		peopleEnemy.hp = 3;
 	}
 	
 	void Update () 
@@ -43,11 +44,30 @@ public class Enemy : MonoBehaviour {
 		transform.position = Vector3.MoveTowards(
 			transform.position,
 			targetPosition,
-			playerEnemy.speed * Time.deltaTime
+			peopleEnemy.speed * Time.deltaTime
 		);
 		
-		//damage
+		
 		
 
+	}
+
+	void OnCollisionEnter2D (Collision2D collision)
+	{
+
+		//damage
+		if(collision.gameObject.CompareTag("Bullet"))
+		{
+			if (peopleEnemy.hp > 0)
+			{
+				peopleEnemy.hp -= 1;
+			}
+			else
+			{
+				Destroy(this.gameObject);	
+			}
+			
+		}
+		
 	}
 }

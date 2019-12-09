@@ -10,10 +10,12 @@ public class Player : MonoBehaviour {
 	private Vector3 initialPosition;
 	
 	private Vector3 mouseTargetPosition;
+	private RenderHealth playerHP;
 
 	void Start () 
 	{
 		peoplePlayer = new People();
+		playerHP = new RenderHealth();
 		peoplePlayer.speed = 10.0f;
 		peoplePlayer.hp = 3;
 		
@@ -35,15 +37,19 @@ public class Player : MonoBehaviour {
 		peoplePlayer.playerAnimator = GetComponent<Animator>();
 	}
 	
-	void OnCollisionEnter2D(Collision2D collision)
+	void OnTriggerEnter2D (Collider2D collision)
 	{
+		Debug.Log("Teste");
 		if(IsEnemy(collision))
 		{
 			peoplePlayer.DamageHit(1);
+			playerHP.RenderHearts(peoplePlayer.hp);
+			if(peoplePlayer.hp <= 0)
+				peoplePlayer.Die();
 		}
 	}
 
-	bool IsEnemy(Collision2D collision)
+	bool IsEnemy(Collider2D collision)
 	{
 		if(collision.gameObject.CompareTag("Enemy"))
 			return true;
